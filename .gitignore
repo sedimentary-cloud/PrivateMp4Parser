@@ -1,0 +1,48 @@
+# Build directories
+/build/
+/build_cov/
+
+# CMake generated files
+/CMakeCache.txt
+/CMakeFiles/
+/cmake_install.cmake
+/CTestTestfile.cmake
+/Makefile
+/Makefile2
+/compile_commands.json
+
+# Binaries and libraries
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+*.obj
+*.obj.d
+*.o
+*.pdb
+*.ilk
+
+# Test and coverage artifacts
+*.gcda
+*.gcno
+*.gcov
+*.profraw
+*.profdata
+Testing/
+
+# Synthetic sample files
+*.mp4
+*.bin
+
+# Editor and local workspace files
+.vscode/
+.idea/
+*.user
+*.suo
+*.tmp
+*.log
+
+# Trae local workspace data
+.trae/

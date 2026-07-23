@@ -1,0 +1,111 @@
+HIKVISION_MEDIA_FILE_HEADER
+Hikvision多媒体文件头信息. 
+
+typedef struct HIKVISION_MEDIA_FILE_HEADER_STRU {
+  unsigned int   start_code; 
+  unsigned int   magic_number; 
+  unsigned int   version; 
+  unsigned int   check_sum; 
+  unsigned short stream_type;
+  unsigned short video_format; 
+  unsigned short channels;
+  unsigned short bits_per_sample; 
+  unsigned int   samples_per_sec;
+ 
+  union { 
+      unsigned int picture_format;
+      struct {
+  	  unsigned short image_width;
+  	  unsigned short image_height; 
+      }size;
+   }image_size; 
+  
+  unsigned int  audio_type;
+  unsigned int  system_param
+} HIKVISION_MEDIA_FILE_HEADER; 
+Members
+start_code 
+文件格式四字符标志码 value define meaning 
+0x484B4D34 HKM4_FILE_CODE 四字符"HKM4" , 文件采用MPEG4视频、ADPCM音频 
+0x484B4834 HKH4_FILE_CODE 四字符"HKH4", 文件采用H.264视频、G.722/G.729音频 
+
+  
+magic_number 
+魔术数 0xd6d0b3fe 
+version 
+录像文件版本的内部标识号, 以日期标记, 如0x20040308 
+注意: 设备版本号为0x20040309时，4CIF格式解码时需要作反隔行操作，但解码器结构的interlace字段必须置为FALSE； 
+
+     设备版本号为其它版本时，4CI格式是否作了两场编码由文件头结构中system_param字段标志，如果作了两场编码，解码时需要作 
+
+  反隔行操作，同时解码器结构的interlace字段必须置为TRUE，如果没有作两场编码，解码器结构的interlace字段必须置为FALSE。 
+
+         请参照解码器结构DECODER_PARAMETERS的interlace字段。 
+
+  
+check_sum 
+校验和 
+stream_type 
+标志数据流类型 value define meaning 
+0x1001 STREAM_VIDEO 视频流 
+0x1002 STREAM_AUDIO 音频流 
+0x1003 STREAM_MULTI 混合流 
+
+  
+video_format 
+视频制式(PAL或者NTSC) value define meaning 
+0x1001 FORMAT_PAL PAL视频制式 
+0x1002 FORMAT_NTSC NTSC视频制式
+
+channels 
+音频通道(mono或者stereo) value define meaning 
+0x1001 AUDIO_MONO 单声道 
+0x1002 AUDIO_STEREO 立体声 
+
+  
+bits_per_sample 
+音频采样点位数 value define meaning 
+8 BITSPERSAMP8 8位 
+16 BITSPERSAMP16 16位 
+
+  
+samples_per_sec 
+音频采样率: 每秒种采样个数 
+picture_format 
+图像分辨率格式 value define meaning 
+0x00001001 CIF_FORMAT PAL: 352*288; NTSC: 352*240 
+0x00001002 QCIF_FORMAT PAL: 176*144; NTSC: 176*128 
+0x00001003 FCIF_FORMAT PAL: 704*576; NTSC: 704*480 
+0x00001004 HCIF_FORMAT PAL: 704*288; NTSC: 704*240 
+0x00001005 QQCIF_FORMAT PAL:  96* 80; NTSC:  96* 64 
+0x00001006 NCIF_FORMAT NTSC: 320*240 
+0x00001007 QNCIF_FORMAT NTSC: 160*128 
+0x00001008 DCIF_FORMAT PAL: 528*384; NTSC: 528*320 
+
+  
+image_width 
+图像宽度 
+image_height 
+图像高度 
+audio_type 
+音频压缩格式 value define meaning 
+0x1001 AUDIO_ADPCM 音频: ADPCM压缩 
+0x1002 AUDIO_G729 音频: G729压缩 
+0x1011 AUDIO_G722_16 音频: G722压缩, 采样率16000samples/psec 
+0x1012 AUDIO_G722_24 音频: G722压缩, 采样率24000samples/psec 
+0x1013 AUDIO_G722_32 音频: G722压缩, 采样率32000samples/psec 
+
+  
+system_param 
+系统设置参数 value define meaning 
+(1<<0) HIK_VIDEO_INTERLACE 4CIF采用场编码模式 
+(1<<1) HIK_STREAM_CRC 对Group中除GROUP_HEADER之外的数据做CRC校验 
+(1<<2) HIK_WATERMARK_VER1 包含水印信息 
+(1<<3) HIK_WATERMARK_RSA 使用512位的RSA算法对水印进行签名(签名后会增加64字节的校验数据) 
+
+Requirements 
+  Windows 2000/XP: Included in Windows 2000 and later.
+  Header: Declared in interface.h; include interface.h.
+
+See Also
+GROUP_HEADER, BLOCK_HEADER

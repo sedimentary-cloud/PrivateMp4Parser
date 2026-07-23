@@ -1,0 +1,4 @@
+- MinGW 5.3.0 路径 D:\mingw64\bin\g++.exe
+- 使用 C++11 标准
+- 使用 CMake build 环境 D:\CMake\bin\cmake.exe
+- 使用 third_party 目录下的 gtest-1.8.1 作为测试框架

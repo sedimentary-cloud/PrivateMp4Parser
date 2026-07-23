@@ -1,0 +1,96 @@
+GROUP_HEADER
+Hikvision组头数据结构. 
+
+typedef struct GROUP_HEADER_STRU {
+  unsigned int start_code; 
+  unsigned int frame_num; 
+  unsigned int time_stamp; 
+  unsigned int is_audio; 
+  unsigned int block_number;
+ 
+  union { 
+      unsigned int picture_format;
+      struct {
+  	  unsigned short image_width;
+  	  unsigned short image_height; 
+      }size;
+   }image_size; 
+  
+  unsigned int picture_mode;
+  unsigned int frame_rate;
+  unsigned int I_quant_value; 
+  unsigned int P_quant_value;
+  unsigned int B_quant_value;
+  unsigned int watermark; 
+ } GROUP_HEADER; 
+Members
+start_code 
+Group Header起始码 value define meaning 
+0x00000001 START_CODE Group Header起始码 
+
+  
+frame_num 
+group中包含的起始帧序号, 帧序号的统计从0开始计算 
+注意: 编码生成码流时,为避免产生错误的起始码,本参数加上了CONST_NUMBER_BASE,在解码使用时需要减去CONST_NUMBER_BASE, 恢复原值.  
+
+CONST_NUMBER_BASE = 0x00001000, 下同 
+
+time_stamp 
+group中包含的起始帧时标, 单位1/64秒 
+is_audio 
+是否存在音频块, 0: 否; 1: 是 
+注意: 编码生成码流时,为避免产生错误的起始码,本参数加上了CONST_NUMBER_BASE,在解码使用时需要减去CONST_NUMBER_BASE, 恢复 原值.  
+
+block_number 
+当前组中的包含块的数量，包括音频块和视频块 
+  
+注意: 编码生成码流时,为避免产生错误的起始码,本参数加上了CONST_NUMBER_BASE,在解码使用时需要减去CONST_NUMBER_BASE, 恢复原值. 
+picture_format 
+图像分辨率格式 value define meaning 
+0x00001001 CIF_FORMAT PAL: 352*288; NTSC: 352*240 
+0x00001002 QCIF_FORMAT PAL: 176*144; NTSC: 176*128 
+0x00001003 FCIF_FORMAT PAL: 704*576; NTSC: 704*480 
+0x00001004 HCIF_FORMAT PAL: 704*288; NTSC: 704*240 
+0x00001005 QQCIF_FORMAT PAL:  96* 80; NTSC:  96* 64 
+0x00001006 NCIF_FORMAT NTSC: 320*240 
+0x00001007 QNCIF_FORMAT NTSC: 160*128 
+0x00001008 DCIF_FORMAT PAL: 528*384; NTSC: 528*320
+
+image_width 
+图像宽度 
+image_height 
+图像高度 
+picture_mode 
+组模式 value define meaning 
+0x00001001  I_FRAME_MODE 视频帧组合模式为I 
+0x00001002  III_FRAME_MODE 视频帧组合模式为III 
+0x00001003  P_FRAME_MODE 视频帧组合模式为P 
+0x00001004  BP_FRAME_MODE 视频帧组合模式为BP 
+0x00001005  BBP_FRAME_MODE 视频帧组合模式为BBP 
+0x00001006  AUDIO_I_FRAME_MODE 音频帧组合模式为I 
+0x00001007  AUDIO_P_FRAME_MODE 音频帧组合模式为P 
+
+frame_rate 
+视频帧率 
+  
+注意: 编码生成码流时,为避免产生错误的起始码,本参数加上了CONST_NUMBER_BASE,在解码使用时需要减去CONST_NUMBER_BASE,恢复原值. 
+I_quant_value 
+I帧的量化因子, 只对Mpeg4编码有效 
+P_quant_value 
+P帧的量化因子, 只对Mpeg4编码有效 
+B_quant_value 
+B帧的量化因子, 只对Mpeg4编码有效 
+watermark 
+ 当前的全局时间, 参见水印信息结构WATERMARK_VER1_INFO中global_time字段 
+Requirements 
+  Windows 2000/XP: Included in Windows 2000 and later.
+  Header: Declared in interface.h; include interface.h.
+
+See Also
+HIKVISION_MEDIA_FILE_HEADER, BLOCK_HEADER 
+
+Requirements 
+  Windows 2000/XP: Included in Windows 2000 and later.
+  Header: Declared in interface.h; include interface.h.
+See Also
+HIKVISION_MEDIA_FILE_HEADER, BLOCK_HEADER

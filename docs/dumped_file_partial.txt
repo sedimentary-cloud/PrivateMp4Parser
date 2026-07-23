@@ -1,0 +1,50 @@
+==============================
+  #1  [文件头 / File Header]  (size=40 bytes)  offset=0x0
+==============================
+  [1] start_code:     0x484B4834 (HKH4)
+  [2] magic_number:   0xD6D0B3FE
+  [3] version:        0x20040308
+  [4] check_sum:      0x00000000
+  [5] stream_type:    0x1001 (UNKNOWN)
+  [6] video_format:   0x1001
+  [7] channels:       0x1001
+  [8] bits_per_sample: 16
+  [9] samples_per_sec: 11904
+  [10] image_size:     640x480
+  [11] audio_type:     0x00001011
+  [12] system_param:   0x00000004
+
+-----------------------------
+  #2  [组头 / Group Header]  (size=48 bytes)  offset=0x28
+-----------------------------
+  [1] start_code:     0x00000001
+  [2] frame_num:      21665 (raw: 0x000054A1 / stripped: 17569)
+  [3] time_stamp:     45224 (0x0000B0A8)
+  [4] is_audio:       0
+  [5] block_number:   1
+  [6] picture_mode:   0x00001001 (I_FRAME_MODE)
+  [7] frame_rate:     25
+  [8] i_quant_value:  16796488
+  [9] p_quant_value:  313812235
+  [10] b_quant_value: 4294901920
+  [11] watermark:     764858442 (0x2D96D04A)
+
+    [0x0000]  01 00 00 00 A1 54 00 00 A8 B0 00 00 00 10 00 00  .....T..........
+    [0x0010]  01 10 00 00 80 02 E0 01 01 10 00 00 19 10 00 00  ................
+    [0x0020]  48 4B 00 01 0B 65 B4 12 A0 00 FF FF 4A D0 96 2D  HK...e......J..-
+
+  -- #3  [块头 / Block Header]  (size=20 bytes)  offset=0x58
+  [1] block_type:     0x1003 (VIDEO_I_BLOCK)
+  [2] version:        0x0007
+  [3] copyright:      0
+  [4] flags:          0x0000000E
+  [5] qp:             12
+  [6] lf_idc:         2
+  [7] lf_alpha_c0:    0
+  [8] lf_beta:        0
+  [9] block_size:     64636
+
+    [0x0000]  03 10 07 00 00 00 00 00 0E 00 00 00 0C 02 00 00  ................
+    [0x0010]  7C FC 00 00                                      |...
+
+  -- #4  [块数据 / Block Data]  (size=64636 bytes)  offset=0x6C

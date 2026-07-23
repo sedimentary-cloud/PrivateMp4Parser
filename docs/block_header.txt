@@ -1,0 +1,55 @@
+BLOCK_HEADER
+Hikvision块头数据结构. 
+
+typedef struct BLOCK_HEADER_STRU {
+  unsigned short block_type; 
+  unsigned short version; 
+  unsigned int   copyright; 
+  unsigned int   flags; 
+  char 	        qp;
+  char           LFIdc; 
+  char 	        LFAlphaC0Offset;
+  char 	        LFBetaOffset; 
+  unsigned int   block_size;
+} BLOCK_HEADER; 
+Members
+block_type 
+文件格式四字符标志码 value define meaning 
+0x00001001  AUDIO_I_BLOCK 音频I帧数据块 
+0x00001002  AUDIO_P_BLOCK 音频P帧数据块 
+0x00001003  VIDEO_I_BLOCK 视频I帧数据块 
+0x00001004  VIDEO_P_BLOCK 视频P帧数据块 
+0x00001005  VIDEO_B_BLOCK 视频B帧数据块 
+
+  
+version 
+在I帧中加入的HIKVISION H.264版本号，旧的版本不能解新版本的码率 
+copyright 
+版权信息, 仅使用第一个字节 
+flags 
+编码标记 
+qp 
+量化系数 
+LFIdc 
+滤波方式 
+  
+LFAlphaC0Offset 
+Alpha滤波调节参数(-6, 6) 
+LFBetaOffset 
+Beta  滤波调节参数(-6, 6) 
+注意： 以上蓝色字体部分只对H264编码有效  
+  
+block_size 
+数据块大小, 以字节为单位, 不包括块头block header本身 
+Requirements 
+  Windows 2000/XP: Included in Windows 2000 and later.
+  Header: Declared in interface.h; include interface.h.
+
+See Also
+HIKVISION_MEDIA_FILE_HEADER,GROUP_HEADER 
+
+Requirements 
+  Windows 2000/XP: Included in Windows 2000 and later.
+  Header: Declared in interface.h; include interface.h.
+See Also
+HIKVISION_MEDIA_FILE_HEADER,GROUP_HEADER
